@@ -48,6 +48,7 @@ def generate(cells):
 
 
 def validate(cells):
+	inv_char = "Valid"
 	for c in cells:
 		if c != 0 and c != 1:
 			inv_char = "This is not valid"
