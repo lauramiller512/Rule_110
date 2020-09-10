@@ -35,15 +35,17 @@ def make_binary(cells):
 
 	return new_list
 
-def display(cells):
+def generate(cells):
 	built_list = ""
 	for c in cells[1:-1]:
 		if c is 0:
-			built_list.append(". ")
+			built_list = built_list + ". "
 		else:
-			built_list.append("O ")
+			built_list = built_list + "O "
+	
+	print(built_list)
 	return built_list
-	sys.stdout.write("\n")
+
 
 def validate(cells):
 	for c in cells:
@@ -52,15 +54,15 @@ def validate(cells):
 
 
 
-cells = [3, 0,0,0,0,0,0,0,0,3,0,0,0,"t",0,0,0,0,0,0,0,0,0,0,1, 0]
+cells = [0,0,0,0,0,0,0,0,0,1,0]
 cells = make_binary(cells)
 
 
 def main():
 	n_list = cells
 	while True:
-		display(n_list)
+		generate(n_list)
 		n_list = compute(n_list)
-		sleep(.5)
+		sleep(.7)
 
 #main()
