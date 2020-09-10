@@ -11,6 +11,7 @@ class TestMakeBinary(unittest.TestCase):
         result = rule_110.make_binary(["t"])
         self.assertEqual(result, [0])
 
+    #passes
     def test_generate(self):
         result = rule_110.generate([0,0,0,0,1,0])
         self.assertEqual(result, ". . . O ")
@@ -19,6 +20,11 @@ class TestMakeBinary(unittest.TestCase):
     def test_compute(self):
         result = rule_110.compute([0,0,0,0,0,1,0])
         self.assertEqual(result, [0,0,0,0,1,1,0])
+
+    #passes
+    def test_validate(self):
+        result = rule_110.validate([3])
+        self.assertEqual(result, "This is not valid")
 
 
 if __name__ == '__main__':

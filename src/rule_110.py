@@ -50,8 +50,9 @@ def generate(cells):
 def validate(cells):
 	for c in cells:
 		if c != 0 and c != 1:
-			print("Not valid")
+			inv_char = "This is not valid"
 
+	return inv_char
 
 
 cells = [0,0,0,0,0,0,0,0,0,1,0]
