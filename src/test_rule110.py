@@ -23,11 +23,9 @@ class TestMakeBinary(unittest.TestCase):
 
     
     def test_validate(self):
-        result = rule_110.validate([3])
-        self.assertEqual(result, "This is not valid")
+        self.assertRaises(ValueError, rule_110.validate, [3])
 
-        result = rule_110.validate([0])
-        self.assertEqual(result, "Valid")
+        rule_110.validate([0])
 
 
 if __name__ == '__main__':
