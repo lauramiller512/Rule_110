@@ -1,45 +1,44 @@
 from time import sleep
+import itertools
+import sys
 
-rule = input(str(("Enter rule number: ")))
 
-cells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+def parse_rule(rule_number):
+    return list(map(int, list(str(bin(int(rule_number)))[2:].zfill(8))))
 
-grid = {
-    111: 3,
-    110: 3,
-    101: 3,
-    100: 3,
-    011: 3,
-    010: 3,
-    001: 3,
-    000: 3
-}
 
-def make_binary(rule):
-    binary = bin(rule)
+def make_states():
+    return list(list(itertools.product([1, 0], repeat=3)))
 
-    # remove the first two chars from the bin
-    binary = binary[2:].zfill(8)
-    print(binary)
+def make_map(s, r):
+    return dict(zip(s, r))
 
-def compute(cells):
-    # currently only  computes based on 110
-    print(" ".join(["." if not c else "X" for c in cells]))
+def compute(cells, rule_map):
+    # need to examine pairs in grid to determine cells
+
+    print(" ".join(["." if not a else "X" for a in cells]))
+
     l = len(cells)
     new = []
     for i in range(l):
         neighbours = (cells[(i - 1) % l], cells[i], cells[(i + 1) % l])
-        if neighbours in [(1, 0, 0), (1, 1, 1), (0, 0, 0)]:
-            new.append(0)
-        else:
-            new.append(1)
-    sleep(.5)
-    compute(new)
+        new.append(rule_map[neighbours])
     
 
+    sleep(.5)
+    return new
 
-make_binary(rule)
-compute(cells)
+def main():
+    cells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    rule_number = input(str(("Enter rule number: ")))
+    rule_number = parse_rule(rule_number)
+    states = make_states()
+    rule_map = make_map(states, rule_number)
+    try: 
+        while True:
+            cells = compute(cells, rule_map)
+    except KeyboardInterrupt:
+        sys.exit("Game over")
 
-# 1. turns rule number into binary string
-# 2. apply rule to list
+if __name__ ==  "__main__":
+    main()
